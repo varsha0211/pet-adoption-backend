@@ -7,12 +7,13 @@ import {
 } from '@nestjs/common';
 import { CreateAuthDto } from './dto/signup-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User, UserRole } from './entities/auth.entity';
+import { User } from './entities/auth.entity';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { UserRole } from 'src/common/enums/roles.enum';
 
 @Injectable()
 export class AuthService {
@@ -83,7 +84,7 @@ export class AuthService {
         },
       );
 
-      const { id, firstName, lastName, email, isActive } = user;
+      const { id, firstName, lastName, email, isActive, role } = user;
       return {
         id,
         firstName,
@@ -91,6 +92,7 @@ export class AuthService {
         email,
         token,
         isActive,
+        role,
       };
     } catch (error) {
       throw error;

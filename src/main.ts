@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import { HttpException, HttpStatus, ValidationPipe } from '@nestjs/common';
 import { ValidationError } from 'class-validator';
 import { AllExceptionsFilter } from './common/middleware/exception.filter';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -14,6 +15,15 @@ async function bootstrap() {
   //   methods: 'GET,PATCH,POST,DELETE,OPTIONS',
   //   credentials: true,
   // });
+
+  const config = new DocumentBuilder()
+    .setTitle('Pet Adoption API')
+    .setDescription('API documentation for Pet Adoption System')
+    .setVersion('1.0')
+    .addBearerAuth()
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
 
   app.use(morgan('tiny'));
   app.useGlobalPipes(

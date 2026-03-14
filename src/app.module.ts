@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
+import { PetsModule } from './pets/pets.module';
+import { AdoptionModule } from './adoption/adoption.module';
 import configuration from './common/configuration';
 
 @Module({
@@ -34,6 +36,8 @@ import configuration from './common/configuration';
     }),
 
     AuthModule,
+    PetsModule,
+    AdoptionModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -13,7 +13,7 @@ export class AuthController {
     return res.status(HttpStatus.OK).json({
       statusCode: HttpStatus.OK,
       status: true,
-      message: 'User signup sucess',
+      message: 'User registered successfully',
       result,
     });
   }

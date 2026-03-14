@@ -1,15 +1,13 @@
+import { AdoptionRequest } from 'src/adoption/entities/adoption.entity';
+import { UserRole } from 'src/common/enums/roles.enum';
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
-
-export enum UserRole {
-  USER = 'USER',
-  ADMIN = 'ADMIN',
-}
 
 @Entity('users')
 export class User {
@@ -52,4 +50,7 @@ export class User {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToMany(() => AdoptionRequest, (adoption) => adoption.user)
+  adoptionRequests: AdoptionRequest[];
 }
